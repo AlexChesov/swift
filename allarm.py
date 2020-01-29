@@ -119,7 +119,7 @@ for mt_file in glob.glob('*.prt'):
                 delfile += 1
     if delfile > 0:
         os.unlink(mt_file)
-
+# Запускаем локальный скрипт отправки необработанных сообщений
 #subprocess.call("/usr/alliance/script/mail_alarm.sh")
 subprocess.call("/Users/alexchesov/Documents/project/swift/hello.sh")
 #subprocess.call("C:\project\py\hello.bat")
