@@ -19,7 +19,7 @@ recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', '
 #os.chdir('//usr//alliance//skb//routing//warning//')
 os.chdir('//Users//alexchesov//Documents//project//swift//files')
 #os.chdir('C:\\project\\swift\\files')
-os.chdir('C:\\project\\swift\\files')
+#os.chdir('C:\\project\\swift\\files')
 for mt_file in glob.glob('*.prt'):
     global delfile
     delfile =  0
@@ -123,4 +123,4 @@ for mt_file in glob.glob('*.prt'):
 #subprocess.call("/usr/alliance/script/mail_alarm.sh")
 subprocess.call("/Users/alexchesov/Documents/project/swift/hello.sh")
 #subprocess.call("C:\project\py\hello.bat")
-subprocess.call("C:\project\py\hello.bat")
+#subprocess.call("C:\project\py\hello.bat")
