@@ -17,12 +17,9 @@ recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-sche
 recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
 
 #os.chdir('//usr//alliance//skb//routing//warning//')
-<<<<<<< HEAD
 os.chdir('//Users//alexchesov//Documents//project//swift//files')
 #os.chdir('C:\\project\\swift\\files')
-=======
 os.chdir('C:\\project\\swift\\files')
->>>>>>> 36171b160a5d36073a06dc0e8c74d297733739c3
 for mt_file in glob.glob('*.prt'):
     global delfile
     delfile =  0
@@ -117,19 +114,13 @@ for mt_file in glob.glob('*.prt'):
                                 #smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
                             #finally:
                                 #smtpObj.quit()
-<<<<<<< HEAD
             # Ищем отключенный Message Partner
             if 'Message Partner' in line0:
                 delfile += 1
-=======
->>>>>>> 36171b160a5d36073a06dc0e8c74d297733739c3
     if delfile > 0:
         os.unlink(mt_file)
 
 #subprocess.call("/usr/alliance/script/mail_alarm.sh")
-<<<<<<< HEAD
 subprocess.call("/Users/alexchesov/Documents/project/swift/hello.sh")
 #subprocess.call("C:\project\py\hello.bat")
-=======
 subprocess.call("C:\project\py\hello.bat")
->>>>>>> 36171b160a5d36073a06dc0e8c74d297733739c3
