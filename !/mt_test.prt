@@ -1,0 +1,30 @@
+{1:F01COMKRUMMAXXX0000000000}{2:I999COMKRUMMXSWIN}{4:
+:20:SAAR7350
+:79:Number : 8005
+Name : Message NAK'd
+Application: SIS
+Severity : Warning
+Type : Alarm Event
+Date-Time : 14/01/20 10:07:54
+GMT : Tue Jan 14 07:07:54 2020
+Text :
+Message UMID ITRCKCHZZXXX199200114/176590/02, Suffix 2001144642688: nacked by SWIFT. Session 1815, ISN 403589, Reason code T31007 Nack received:
+ 1:F21COMKRUMMAXXX1815403589 4: 177:2001141008 4
+51:1 405:T31007 108:REF459072183
+Sending Correlation Id:
+SIS-91f9ed72-369c-41ea-aa46-bf6294f32d2c
+Nack Correlation Id:
+snna server-18600-1946154752-1578985674-1-58
+-} {1:F01COMKRUMMAXXX0000000000}{2:I999COMKRUMMXSWIN}{4:
+:20:SAAR7350
+:79:Number : 2010
+Name : Queue overflow
+Application: BSS
+Severity : Warning
+Type : Alarm Event
+Date-Time : 14/01/20 10:08:03
+GMT : Tue Jan 14 07:08:03 2020
+Text :
+The queue LocalSwiftNaks is in overflow. (1 message instance(s), threshold is 0).
+Empty this queue as soon as possible.
+-} 

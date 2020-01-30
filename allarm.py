@@ -38,7 +38,7 @@ for mt_file in glob.glob('*.prt'):
                             data = DataTime.search(line1)
                             data = (data.group())
                             #print(str(data))
-                        # if 'UMID' in line1:
+                        if 'UMID' in line1:
                             BicNum = re.compile(r'(?<=I)[A-Z0-9]{11}(?=\d{3})')
 #                            BicNum = re.compile(r'UMID\s+[A-Z0-9]{12}')
                             MsgType = re.compile(r'UMID\s+[A-Z0-9]{12}\d{3}')
