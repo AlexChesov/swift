@@ -1,0 +1,27 @@
+27/01/20-05:46:03           SOMRAlarm-0120-000001              1
+____________________________________________________________________
+
+     ---------------------  Instance Type and Transmission --------------
+       Copy
+       Priority/Delivery        : Normal
+     --------------------------- Message Header -------------------------
+       Swift Input  : FIN 999 Free Format Message
+       Sender   : SOMRRUMMLRM
+       Receiver : SOMRRUMMSYS
+                  SOVCOMBANK
+                  MOSCOW RU
+     --------------------------- Message Text ---------------------------
+        20: Transaction Reference Number
+            SAAR7350
+        79: Narrative
+            Number : 2010
+            Name       : Queue overflow
+            Application: BSS
+            Severity   : Warning
+            Type       : Alarm Event
+            Date-Time  : 20/01/27 05:41:09
+            GMT        : Mon Jan 27 02:41:09 2020
+            Text       :
+            The queue LocalSwiftNaks is in overflow. (2
+            message instance(s), threshold is 0).
+            Empty this queue as soon as possible.
