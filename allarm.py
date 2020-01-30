@@ -57,8 +57,7 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header('MESSAGE NAK DETECTED', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_busines)
-                            #print(msg['To'])
-                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
                             #try:
                                 #smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
                             #finally:
@@ -83,7 +82,7 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header('QUEUE OVERFLOW', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_busines)
-                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
                             #try:
                                 #smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
                             #finally:
@@ -91,7 +90,7 @@ for mt_file in glob.glob('*.prt'):
             # Ищем подключение логического терминала
             if 'Name       : Select ACK received' in line0:
                 delfile += 1
-                #print('*********Select ACK received*********')
+                print('*********Select ACK received*********')
                 with open(mt_file) as mt_data2:
                     for num2, line2 in enumerate(mt_data2):
                         if 'Date-Time' in line2:
@@ -109,7 +108,7 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header(lt_name + ' - Select ACK received', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_admins)
-                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
                             #try:
                                 #smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
                             #finally:
