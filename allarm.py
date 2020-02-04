@@ -13,15 +13,15 @@ from email.header import Header
 # Отправитель
 login = 'swift-somr@sovcombank.ru'
 # Группы получателей для боевой рассылки
-#recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
-#recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
+recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
 # Для локального тестирования
-recipients_busines = ['golovochesovaa@sovcombank.ru']
-recipients_admins = ['golovochesovaa@sovcombank.ru']
+#recipients_busines = ['golovochesovaa@sovcombank.ru']
+#recipients_admins = ['golovochesovaa@sovcombank.ru']
 
-#os.chdir('//usr//alliance//skb//routing//warning//')
+os.chdir('//usr//alliance//skb//routing//warning//')
 #os.chdir('//Users//alexchesov//Documents//project//swift//files')
-os.chdir('C:\\py\\swift\\files')
+#os.chdir('C:\\py\\swift\\files')
 for mt_file in glob.glob('*.prt'):
     global delfile
     delfile =  0
@@ -59,11 +59,11 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header('MESSAGE NAK DETECTED', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_busines)
-                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
-                            #try:
-                                #smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
-                            #finally:
-                                #smtpObj.quit()
+                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            try:
+                                smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
+                            finally:
+                                smtpObj.quit()
             # Ищем переполнение очереди
             if 'Queue overflow' in line0:
                 delfile += 1
@@ -84,11 +84,11 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header('QUEUE OVERFLOW', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_busines)
-                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
-                            #try:
-                                #smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
-                            #finally:
-                                #smtpObj.quit()
+                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            try:
+                                smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
+                            finally:
+                                smtpObj.quit()
             # Ищем подключение логического терминала
             if 'Name       : Select ACK received' in line0:
                 delfile += 1
@@ -110,15 +110,15 @@ for mt_file in glob.glob('*.prt'):
                             msg['Subject'] = Header(lt_name + ' - Select ACK received', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_admins)
-                            #smtpObj = smtplib.SMTP('10.80.96.73', 25)
-                            #try:
-                                #smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
-                            #finally:
-                                #smtpObj.quit()
+                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            try:
+                                smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
+                            finally:
+                                smtpObj.quit()
             # Ищем отключенный Message Partner
             if 'Disable Message Partner' in line0:
                 delfile += 1
-                print('*********Message Partner Disable**********')
+                #print('*********Message Partner Disable**********')
                 with open(mt_file) as mt_data3:
                     for num3, line3 in enumerate(mt_data3):
                         if 'Date-Time' in line3:
@@ -126,11 +126,11 @@ for mt_file in glob.glob('*.prt'):
                             data = DataTime.search(line3)
                             data = (data.group())
                         if 'Message Partner ' in line3:
-                            print('MP Disable Detected')
+                            #print('MP Disable Detected')
                             MP_Type = re.compile(r'(?<=Partner\s)[A-Za-z0-9]+')
                             MP_Name = MP_Type.search(line3)
                             MP_Name = (MP_Name.group())
-                            print(str(MP_Name))
+                            #print(str(MP_Name))
                             msg = MIMEText('Внимание!\n' + data + '\nMessage Partner - ' + MP_Name + ' - деактивирован!' + '\n\nСписок Message Partners:\nSOMRfromABSall - обработка исходящих сообщений, кроме 3-й категории. \nSOMRfromABS3xx - обработка исходящих сообщений 3-я категория. \nSOMRtoABS129 - обработака входящих сообщений 1, 2, 9 категорий. \nSOMRtoABS3xx - обработка входящих сообщений 3-й категории. \nSOMRPrint3xx - выгрузка печатных форм 3-й категории. \nSOMRPrint - выгрузка печатных форм, кроме 3-й категории.', 'plain', 'utf-8')
                             msg['Subject'] = Header('Message Partner - ' + MP_Name + ' - Disabled!!!', 'utf-8')
                             msg['From'] = login
@@ -143,6 +143,6 @@ for mt_file in glob.glob('*.prt'):
     #if delfile > 0:
         #os.unlink(mt_file)
 # Запускаем локальный скрипт отправки необработанных сообщений
-#subprocess.call("//usr//alliance//script//mail_alarm.sh")
+subprocess.call("//usr//alliance//script//mail_alarm.sh")
 #subprocess.call("//Users//alexchesov//Documents//project//swift//hello.sh")
-subprocess.call("C:\\project\\py\\hello.bat")
+#subprocess.call("C:\\project\\py\\hello.bat")
