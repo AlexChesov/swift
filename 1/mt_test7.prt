@@ -1,0 +1,25 @@
+20/01/20-18:12:29           SOMRAlarm-0103-000001              1
+____________________________________________________________________
+
+     ---------------------  Instance Type and Transmission --------------
+       Copy
+       Priority/Delivery        : Normal
+     --------------------------- Message Header -------------------------
+       Swift Input  : FIN 999 Free Format Message
+       Sender   : SOMRRUMMLRM
+       Receiver : SOMRRUMMSYS
+                  SOVCOMBANK
+                  MOSCOW RU
+     --------------------------- Message Text ---------------------------
+        20: Transaction Reference Number
+            SAAR7350
+        79: Narrative
+            Number : 10017
+            Name       : Disable Message Partner
+            Application: MXS
+            Severity   : Info
+            Type       : Alarm Event
+            Date-Time  : 20/01/20 18:07:31
+            GMT        : Mon Jan 20 15:07:31 2020
+            Text       :
+            Message Partner SOMRxxxPROVERKAxxxABS3xx - Disabled
