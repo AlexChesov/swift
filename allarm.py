@@ -12,13 +12,16 @@ from email.header import Header
 #smtpObj = smtplib.SMTP('10.80.96.73', 25)
 # Отправитель
 login = 'swift-somr@sovcombank.ru'
-# Группы получателей
-recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
-recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
+# Группы получателей для боевой рассылки
+#recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+#recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
+# Для локального тестирования
+recipients_busines = ['golovochesovaa@sovcombank.ru']
+recipients_admins = ['golovochesovaa@sovcombank.ru']
 
 #os.chdir('//usr//alliance//skb//routing//warning//')
-os.chdir('//Users//alexchesov//Documents//project//swift//files')
-#os.chdir('C:\\project\\swift\\files')
+#os.chdir('//Users//alexchesov//Documents//project//swift//files')
+os.chdir('C:\\py\\swift\\files')
 for mt_file in glob.glob('*.prt'):
     global delfile
     delfile =  0
@@ -89,7 +92,7 @@ for mt_file in glob.glob('*.prt'):
             # Ищем подключение логического терминала
             if 'Name       : Select ACK received' in line0:
                 delfile += 1
-                print('*********Select ACK received*********')
+                #print('*********Select ACK received*********')
                 with open(mt_file) as mt_data2:
                     for num2, line2 in enumerate(mt_data2):
                         if 'Date-Time' in line2:
@@ -103,7 +106,7 @@ for mt_file in glob.glob('*.prt'):
                             #print(str(lt_name))
                             lt_name = (lt_name.group())
                             #print('Логический терминал - ' + str(lt_name) + ' - успешно подключен!')
-                            msg = MIMEText('Внимание!!!\n' + data + '\n' + 'Логический терминал - ' + lt_name + ' - успешно подключен!', 'plain', 'utf-8')
+                            msg = MIMEText('Для информации!\n' + data + '\n' + 'Логический терминал - ' + lt_name + ' - успешно подключен!', 'plain', 'utf-8')
                             msg['Subject'] = Header(lt_name + ' - Select ACK received', 'utf-8')
                             msg['From'] = login
                             msg['To'] = ", ".join(recipients_admins)
@@ -113,11 +116,33 @@ for mt_file in glob.glob('*.prt'):
                             #finally:
                                 #smtpObj.quit()
             # Ищем отключенный Message Partner
-            if 'Message Partner' in line0:
+            if 'Disable Message Partner' in line0:
                 delfile += 1
-    if delfile > 0:
-        os.unlink(mt_file)
+                print('*********Message Partner Disable**********')
+                with open(mt_file) as mt_data3:
+                    for num3, line3 in enumerate(mt_data3):
+                        if 'Date-Time' in line3:
+                            DataTime = re.compile(r'Date-Time\s+:\s+\d\d/\d\d/\d\d\s\d\d:\d\d:\d\d(.*?)')
+                            data = DataTime.search(line3)
+                            data = (data.group())
+                        if 'Message Partner ' in line3:
+                            print('MP Disable Detected')
+                            MP_Type = re.compile(r'(?<=Partner\s)[A-Za-z0-9]+')
+                            MP_Name = MP_Type.search(line3)
+                            MP_Name = (MP_Name.group())
+                            print(str(MP_Name))
+                            msg = MIMEText('Внимание!\n' + data + '\nMessage Partner - ' + MP_Name + ' - деактивирован!' + '\n\nСписок Message Partners:\nSOMRfromABSall - обработка исходящих сообщений, кроме 3-й категории. \nSOMRfromABS3xx - обработка исходящих сообщений 3-я категория. \nSOMRtoABS129 - обработака входящих сообщений 1, 2, 9 категорий. \nSOMRtoABS3xx - обработка входящих сообщений 3-й категории. \nSOMRPrint3xx - выгрузка печатных форм 3-й категории. \nSOMRPrint - выгрузка печатных форм, кроме 3-й категории.', 'plain', 'utf-8')
+                            msg['Subject'] = Header('Message Partner - ' + MP_Name + ' - Disabled!!!', 'utf-8')
+                            msg['From'] = login
+                            msg['To'] = ", ".join(recipients_admins)
+                            smtpObj = smtplib.SMTP('10.80.96.73', 25)
+                            try:
+                                smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
+                            finally:
+                                smtpObj.quit()
+    #if delfile > 0:
+        #os.unlink(mt_file)
 # Запускаем локальный скрипт отправки необработанных сообщений
-#subprocess.call("/usr/alliance/script/mail_alarm.sh")
-subprocess.call("/Users/alexchesov/Documents/project/swift/hello.sh")
-#subprocess.call("C:\project\py\hello.bat")
+#subprocess.call("//usr//alliance//script//mail_alarm.sh")
+#subprocess.call("//Users//alexchesov//Documents//project//swift//hello.sh")
+subprocess.call("C:\\project\\py\\hello.bat")
