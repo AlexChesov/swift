@@ -76,7 +76,7 @@ for mt_file in glob.glob('*.prt'):
                             data = (data.group())
                             #print(str(data))
                         if 'is in overflow' in line1:
-                            QueueType = re.compile(r'(?<=queue\s)[A-Za-z]+(?=\sis\sin\soverflow)')
+                            QueueType = re.compile(r'(?<=queue\s)[A-Za-z0-9]+(?=\sis\sin\soverflow)')
                             queue_name = QueueType.search(line1)
                             queue_name = (queue_name.group())
                             #print('Переполненная очередь - ' + queue_name)
