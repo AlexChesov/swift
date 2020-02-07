@@ -13,7 +13,7 @@ from email.header import Header
 # Отправитель
 login = 'swift-somr@sovcombank.ru'
 # Группы получателей для боевой рассылки
-recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+recipients_busines = ['fc-position@sovcombank.ru', 'ZakharovaEA@sovcombank.ru ', 'fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
 recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
 # Для локального тестирования
 #recipients_busines = ['golovochesovaa@sovcombank.ru']
@@ -106,13 +106,13 @@ for mt_file in glob.glob('*.prt'):
                             #print(str(lt_name))
                             lt_name = (lt_name.group())
                             #print('Логический терминал - ' + str(lt_name) + ' - успешно подключен!')
-                            msg = MIMEText('Для информации!\n' + data + '\n' + 'Логический терминал - ' + lt_name + ' - успешно подключен!', 'plain', 'utf-8')
+                            msg = MIMEText('Для информации!\n' + data + '\n' + 'Логический терминал - ' + lt_name + ' - успешно подключен! \nНикаких действий не требуется. \n\nLT SOMRRUMMA - боевой логический терминал. \nLT SOMRRUM0A - тестовый логический терминал.', 'plain', 'utf-8')
                             msg['Subject'] = Header(lt_name + ' - Select ACK received', 'utf-8')
                             msg['From'] = login
-                            msg['To'] = ", ".join(recipients_admins)
+                            msg['To'] = ", ".join(recipients_busines)
                             smtpObj = smtplib.SMTP('10.80.96.73', 25)
                             try:
-                                smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
+                                smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
                             finally:
                                 smtpObj.quit()
             # Ищем отключенный Message Partner
@@ -140,8 +140,8 @@ for mt_file in glob.glob('*.prt'):
                                 smtpObj.sendmail(msg['From'], recipients_admins, msg.as_string())
                             finally:
                                 smtpObj.quit()
-    #if delfile > 0:
-        #os.unlink(mt_file)
+    if delfile > 0:
+        os.unlink(mt_file)
 # Запускаем локальный скрипт отправки необработанных сообщений
 subprocess.call("//usr//alliance//script//mail_alarm.sh")
 #subprocess.call("//Users//alexchesov//Documents//project//swift//hello.sh")
