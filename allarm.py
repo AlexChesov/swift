@@ -14,7 +14,7 @@ from email.header import Header
 login = 'swift-somr@sovcombank.ru'
 # Группы получателей для боевой рассылки
 recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
-recipients_busines_lt = ['fc-position@sovcombank.ru', 'ZakharovaEA@sovcombank.ru ', 'fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+recipients_busines_lt = ['position@sovcombank.ru', 'fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
 recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
 # Для локального тестирования
 #recipients_busines = ['golovochesovaa@sovcombank.ru']
