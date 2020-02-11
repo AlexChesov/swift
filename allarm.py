@@ -13,7 +13,8 @@ from email.header import Header
 # Отправитель
 login = 'swift-somr@sovcombank.ru'
 # Группы получателей для боевой рассылки
-recipients_busines = ['fc-position@sovcombank.ru', 'ZakharovaEA@sovcombank.ru ', 'fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+recipients_busines = ['fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
+recipients_busines_lt = ['fc-position@sovcombank.ru', 'ZakharovaEA@sovcombank.ru ', 'fxs@sovcombank.ru', 'fc-swift2@sovcombank.ru', 'korr-schet-ValutaSWIFT@sovcombank.ru', 'fc-ossofs@sovcombank.ru', 'KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru']
 recipients_admins = ['KisliakovVA@msk.sovcombank.ru', 'BorinVU@sovcombank.ru', 'fc-ossofs@sovcombank.ru']
 # Для локального тестирования
 #recipients_busines = ['golovochesovaa@sovcombank.ru']
@@ -109,10 +110,10 @@ for mt_file in glob.glob('*.prt'):
                             msg = MIMEText('Для информации!\n' + data + '\n' + 'Логический терминал - ' + lt_name + ' - успешно подключен! \nНикаких действий не требуется. \n\nLT SOMRRUMMA - боевой логический терминал. \nLT SOMRRUM0A - тестовый логический терминал.', 'plain', 'utf-8')
                             msg['Subject'] = Header(lt_name + ' - Select ACK received', 'utf-8')
                             msg['From'] = login
-                            msg['To'] = ", ".join(recipients_busines)
+                            msg['To'] = ", ".join(recipients_busines_lt)
                             smtpObj = smtplib.SMTP('10.80.96.73', 25)
                             try:
-                                smtpObj.sendmail(msg['From'], recipients_busines, msg.as_string())
+                                smtpObj.sendmail(msg['From'], recipients_busines_lt, msg.as_string())
                             finally:
                                 smtpObj.quit()
             # Ищем отключенный Message Partner
