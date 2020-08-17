@@ -145,5 +145,5 @@ for mt_file in glob.glob('*.prt'):
         os.unlink(mt_file)
 # Запускаем локальный скрипт отправки необработанных сообщений
 subprocess.call("//usr//alliance//script//mail_alarm.sh")
-#subprocess.call("//Users//alexchesov//Documents//project//swift//hello.sh")
-#subprocess.call("C:\\project\\py\\hello.bat")
+#subprocess.call("//Users//alexchesov//Documedsfj;ants//project//swift//hello.sh")
+#subprocess.call("C:\\project\\py\\hello.bat
